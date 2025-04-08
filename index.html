@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Redirecting to Naver Form...</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXX');
+    </script>
+  </head>
+  <body>
+    <p>SAT 전문가를 만나러 가는 중입니다...</p>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const src = params.get('src') || '';
+
+      // 네이버 폼 링크 매핑: 작성자별
+      const formLinks = {
+        writerM: "https://naver.me/5vcNQM5k",
+        writerB: "https://naver.me/xoHZaLjZ",
+        writerH: "https://naver.me/502RrpMr"
+      };
+
+      let formLink = "https://naver.me/defaultForm";
+
+      if (src.includes("writerM")) {
+        formLink = formLinks.writerM;
+      } else if (src.includes("writerB")) {
+        formLink = formLinks.writerB;
+      } else if (src.includes("writerH")) {
+        formLink = formLinks.writerH;
+      }
+
+      // GA 이벤트 전송
+      gtag('event', 'naver_form_submit', {
+        event_category: 'BlogToNaverForm',
+        event_label: src
+      });
+
+      // 1초 후 리디렉션
+      setTimeout(() => {
+        window.location.href = formLink;
+      }, 1000);
+    </script>
+  </body>
+</html>
